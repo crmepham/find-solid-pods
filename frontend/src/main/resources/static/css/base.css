@@ -1,0 +1,32 @@
+* {
+    font-family: "lato","Raleway",Helvetica,Roboto,Arial,sans-serif;
+}
+h1 {
+    color: #FFF;
+    float: left;
+    font-weight: 100 !important;
+    font-size: 0.9em;
+}
+.bg-primary {
+    background: #3f1ca0 !important;
+}
+#global-navigation {
+    height: 100px;
+}
+#global-search {
+    width: 33%;
+    border-radius: 0;
+    padding: 25px;
+}
+#register-btn {
+    background: #3f1ca0;
+    border: 2px solid #FFF;
+    padding: 10px 15px 10px 15px;
+    border-radius: 0;
+    margin-right: 5%;
+}
+#register-btn:hover {
+    color: #3f1ca0;
+    background: #FFF;
+    border: 2px solid #3f1ca0;
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <groupId>com.github.final60</groupId>
+    <artifactId>find-solid-pods</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>find-solid-pods</name>
+    <description>Find Solid Pods</description>
+    <url>https://findsolidpods.com</url>
+
+    <developers>
+        <developer>
+            <name>Christopher Mepham</name>
+            <email>crmepham@hotmail.co.uk</email>
+            <organization>chrismepham.co.uk</organization>
+            <organizationUrl>http://www.chrismepham.co.uk</organizationUrl>
+        </developer>
+    </developers>
+    <modules>
+        <module>common</module>
+        <module>backend</module>
+        <module>frontend</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.8</jdk.version>
+        <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
+        <mysql.version>8.0.12</mysql.version>
+        <lombok.version>1.18.4</lombok.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <gson.version>2.8.5</gson.version>
+        <elasticsearch.version>6.5.2</elasticsearch.version>
+        <spring-elasticsearch.version>2.1.1.RELEASE</spring-elasticsearch.version>
+        <kotlin.version>1.2.71</kotlin.version>
+        <kotlin-reflect.version>1.2.71</kotlin-reflect.version>
+        <elastic-search.version>6.5.2</elastic-search.version>
+        <jna.version>5.1.0</jna.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin-reflect.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

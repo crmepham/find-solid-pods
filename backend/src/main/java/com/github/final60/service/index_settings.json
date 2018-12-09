@@ -1,0 +1,67 @@
+{
+  "settings": {
+    "analysis": {
+      "filter": {
+        "empty_non_special": {
+          "type": "pattern_replace",
+          "pattern": "^((?![^\\s\\w-[_-]]).)*$",
+          "replacement": ""
+        },
+        "remove_empty": {
+          "type": "length",
+          "min": "1"
+        },
+        "add_without_special": {
+          "type": "word_delimiter",
+          "generate_word_parts": "true",
+          "generate_number_parts": "true",
+          "split_on_case_change": "false",
+          "split_on_numerics": "false",
+          "catenate_all": "true",
+          "preserve_original": "true"
+        }
+      },
+      "analyzer": {
+        "reference_number_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "add_without_special",
+            "lowercase"
+          ]
+        },
+        "content_reference_number_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "empty_non_special",
+            "remove_empty",
+            "add_without_special",
+            "lowercase"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "document": {
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "documentType": {
+          "properties": {
+            "id": {
+              "type": "long",
+              "index": "not_analyzed"
+            },
+            "vinSearchOnly": {
+              "type": "boolean",
+              "index": "not_analyzed"
+            }
+          }
+        }
+      }
+    }
+  }
+}

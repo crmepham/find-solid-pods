@@ -1,0 +1,33 @@
+server:
+  port: 3336
+  compression:
+      enabled: true
+      mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+logging:
+  path: /var/log
+  file: frontend.log
+  level:
+    org.slf4j: 'DEBUG'
+    com.server: 'DEBUG'
+
+spring:
+    jpa:
+      database: MYSQL
+      hibernate:
+            ddl-auto: validate
+
+    datasource:
+      url: jdbc:mysql://localhost:3306/findsolidpods
+      username: find-solid-pods
+      password: find-solid-pods
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+provider:
+  sources:
+    - https://raw.githubusercontent.com/solid/solid-idp-list/gh-pages/services.json
+
+elasticsearch:
+  clustername: elasticsearch_crm
+  host: localhost
+  port: 9300
