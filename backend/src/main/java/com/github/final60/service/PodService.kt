@@ -13,7 +13,6 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod.GET
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
-import java.util.stream.Collectors.toList
 
 @Service
 class PodService(private val properties: ProviderProperties, private val restTemplate: RestTemplate, private val elasticSearchService: ElasticSearchService) {
@@ -24,26 +23,23 @@ class PodService(private val properties: ProviderProperties, private val restTem
 
         logger.debug("Retrieving providers from {} known sources.", properties.sources?.size)
 
-        // Get list of potentially new providers.
         val newProviders = getNewProviders()
 
         logger.debug("Retrieved {} providers from {} known sources.", newProviders.size, properties.sources?.size)
 
         val knownProviders = elasticSearchService.getAll(Provider::class.java, PROVIDER, ElasticSearchQuery())
 
-        elasticSearchService.bulkDelete(PROVIDER)
+        val sum = newProviders + knownProviders
 
-        val filtered = mutableSetOf<Provider>()
-        knownProviders.filterTo(filtered) {!knownProviders.stream()
-                                                          .map(Provider::uri)
-                                                          .collect(toList())
-                                                          .contains(it.uri)}
+        val filtered = sum.groupBy { it.uri }
+                          .filter { it.value.size == 1 }
+                          .flatMap { it.value }
 
-        elasticSearchService.bulkIndex(filtered.toMutableSet(), PROVIDER)
+        if (filtered.isNotEmpty()) {
+            elasticSearchService.bulkIndex(filtered.toMutableSet(), PROVIDER)
+        }
 
-        val knownProviders2 = elasticSearchService.getAll(Provider::class.java, PROVIDER, ElasticSearchQuery())
-
-        println(knownProviders2.size)
+        logger.debug("Persisted {} providers from {} known sources.", filtered, properties.sources?.size)
     }
 
     /**
