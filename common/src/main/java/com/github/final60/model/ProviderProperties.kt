@@ -10,5 +10,8 @@ class ProviderProperties {
 
     /** The list of POD provider sources. */
     val sources: List<String>? = ArrayList()
+
+    /** The base uri of the backend API. */
+    var backend: String? = ""
 }
 
