@@ -19,8 +19,8 @@ spring:
 
     datasource:
       url: jdbc:mysql://localhost:3306/findsolidpods
-      username: find-solid-pods
-      password: find-solid-pods
+      username: findsolidpods
+      password: findsolidpods
       driver-class-name: com.mysql.cj.jdbc.Driver
 
 provider:
