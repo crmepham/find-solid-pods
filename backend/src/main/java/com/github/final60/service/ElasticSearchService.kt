@@ -1,6 +1,6 @@
 package com.github.final60.service
 
-import com.github.final60.model.ElasticSearchQuery
+import com.github.final60.model.SearchFilter
 import com.google.gson.GsonBuilder
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
 import org.elasticsearch.action.admin.indices.refresh.RefreshRequest
@@ -39,6 +39,7 @@ class ElasticSearchService {
         const val MAX_RESULTS           = 10000000
         const val RESULT_WINDOW         = 10000
         const val PROVIDER_URI          = "uri"
+        const val PROVIDER_TYPE         = "type"
         const val PROVIDER_TITLE        = "title"
         const val PROVIDER_DESCRIPTION  = "description"
         const val WILDCARD              = "*"
@@ -56,10 +57,10 @@ class ElasticSearchService {
     }
 
     /** Get all the elements in the specified document. */
-    fun <T> getAll(returnType: Class<T>, document: String, query: ElasticSearchQuery) : Set<T> {
+    fun <T> list(returnType: Class<T>, document: String, filter: SearchFilter) : Set<T> {
         val response = client.prepareSearch()
                              .setTypes(document)
-                             .setQuery(queryBuilder(query))
+                             .setQuery(queryBuilder(filter))
                              .addSort(SORT_SCORE, SortOrder.DESC)
                              .get()
 
@@ -113,20 +114,23 @@ class ElasticSearchService {
             val gson = GsonBuilder().setDateFormat(GSON_DATE_FORMAT).create()
             providers.add(gson.fromJson(it.sourceAsString, clazz))
         }
-        return providers;
+        return providers
     }
 
     /** Dynamically build the Elastic Search query based on the supplied parameters. */
-    private fun queryBuilder(query: ElasticSearchQuery): BoolQueryBuilder {
+    private fun queryBuilder(filter: SearchFilter): BoolQueryBuilder {
         val queryBuilder                        = boolQuery()
-        val uriWildCard                         = wildcardQuery(PROVIDER_URI, WILDCARD + query.term + WILDCARD)
-        val titleWildCard                       = wildcardQuery(PROVIDER_TITLE, WILDCARD + query.term + WILDCARD)
-        val descriptionWildCard                 = wildcardQuery(PROVIDER_DESCRIPTION, WILDCARD + query.term + WILDCARD)
+        val uriWildCard                         = wildcardQuery(PROVIDER_URI, WILDCARD + filter.term + WILDCARD)
+        val titleWildCard                       = wildcardQuery(PROVIDER_TITLE, WILDCARD + filter.term + WILDCARD)
+        val descriptionWildCard                 = wildcardQuery(PROVIDER_DESCRIPTION, WILDCARD + filter.term + WILDCARD)
         val wildCardUriAndTitleAndDescription   = boolQuery().should(uriWildCard).should(titleWildCard).should(descriptionWildCard)
 
-        if (!query.term.isNullOrEmpty()) {
-
+        if (!filter.term.isNullOrEmpty()) {
             queryBuilder.must(wildCardUriAndTitleAndDescription)
+        }
+
+        if (!filter.type.isNullOrEmpty() && !filter.type.equals("Any")) {
+            queryBuilder.must(prefixQuery(PROVIDER_TYPE, filter.type))
         }
 
         return queryBuilder
@@ -134,6 +138,10 @@ class ElasticSearchService {
 
     /** Create the Elastic Search index. */
     private fun createIndex() {
+
+        /*val deleteRequest =  DeleteIndexRequest(INDEX)
+        client.admin().indices().delete(deleteRequest)*/
+
         val res = client.admin().indices().prepareExists(INDEX).get()
         if (!res.isExists) {
             val request = CreateIndexRequest(INDEX).settings(Settings.builder().put("index.max_result_window", MAX_RESULTS))

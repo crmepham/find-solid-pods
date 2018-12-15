@@ -1,9 +1,9 @@
 package com.github.final60.service
 
-import com.github.final60.model.ElasticSearchQuery
 import com.github.final60.model.Provider
 import com.github.final60.model.ProviderProperties
 import com.github.final60.model.ProviderWrapper
+import com.github.final60.model.SearchFilter
 import com.github.final60.service.ElasticSearchService.Companion.PROVIDER
 import com.google.gson.Gson
 import org.slf4j.LoggerFactory
@@ -27,7 +27,7 @@ class PodService(private val properties: ProviderProperties, private val restTem
 
         logger.debug("Retrieved {} providers from {} known sources.", newProviders.size, properties.sources?.size)
 
-        val knownProviders = elasticSearchService.getAll(Provider::class.java, PROVIDER, ElasticSearchQuery())
+        val knownProviders = elasticSearchService.list(Provider::class.java, PROVIDER, SearchFilter())
 
         val sum = newProviders + knownProviders
 

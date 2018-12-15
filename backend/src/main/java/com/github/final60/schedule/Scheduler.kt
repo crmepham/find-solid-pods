@@ -15,7 +15,7 @@ class Scheduler(val podService: PodService) : BaseService() {
      * Update the list of known Pod services.
      */
     //@Scheduled(fixedRate = 3000)
-    @Scheduled(cron = "*/5 * * * * ?")
+    @Scheduled(cron = "* */5 * * * ?")
     fun updateKnownPodServices() {
 
         logger.info("Started schedule for updating known Pod services.")

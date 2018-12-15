@@ -1,6 +1,11 @@
 * {
     font-family: "lato","Raleway",Helvetica,Roboto,Arial,sans-serif;
 }
+html, body {
+    height: 100%;
+    overflow: auto;
+    background: #ededed !important;
+}
 h1 {
     color: #FFF;
     float: left;

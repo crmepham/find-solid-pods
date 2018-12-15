@@ -15,9 +15,11 @@ class Provider(@SerializedName("url") val uri: String,
                @SerializedName("btn_color") val buttonColor: String,
                val title: String,
                val description: String,
-               val icon: Boolean) {
+               val icon: String,
+               val type: String,
+               val countryCode: String) {
 
-    constructor() : this("","","","","","","","", false)
+    constructor() : this("","","","","","","","", "", "", "")
 }
 
 

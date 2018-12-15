@@ -11,7 +11,7 @@
           <li class="nav-item">
           </li>
         </ul>
-        <button type="submit" class="btn btn-primary" id="register-btn">Register a Solid Pod</button>
+        <button type="submit" class="btn btn-primary" id="register-btn" data-toggle="modal" data-target="#provider-register-modal">Register a Solid Pod</button>
         <input id="global-search" class="form-control mr-sm-2" type="search" placeholder="search" aria-label="Search" value="">
     </div>
 </nav>
