@@ -59,11 +59,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-        </profile>
-    </profiles>
-
 </project>
