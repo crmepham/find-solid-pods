@@ -15,8 +15,8 @@ create table provider (
 	active bit default false,
 	indexed bit default false,
 	primary key (id),
-	unique(uri, type)
+	unique(uri(30), type)
 ) engine=InnoDB default charset=utf8;
 
-CREATE INDEX provider_uri(25) ON `provider` (uri);
+CREATE INDEX provider_uri ON `provider` (uri(30));
 CREATE INDEX provider_type ON `provider` (type);
