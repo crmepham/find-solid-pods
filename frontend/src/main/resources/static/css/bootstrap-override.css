@@ -1,0 +1,26 @@
+.card {
+    border: 1px solid #bebebe;
+    border-radius: 2px;
+    margin-bottom: 30px;
+}
+.card-header {
+    color: #565656;
+}
+.btn {
+    border-radius: 2px;
+    padding: 10px;
+    font-size: 0.8em;
+    transition: background-color 200ms ease-out;
+}
+.btn-primary {
+    background: #3f1ca0;
+}
+.alert-primary {
+    background: #e7e4ff;
+    border: 1px solid #c2bfd8;
+    color: #3f1ca0;
+}
+.form-control, .alert {
+    border-radius: 0;
+    -webkit-appearance: none;
+}

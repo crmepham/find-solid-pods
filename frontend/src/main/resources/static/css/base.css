@@ -2,8 +2,6 @@
     font-family: "lato","Raleway",Helvetica,Roboto,Arial,sans-serif;
 }
 html, body {
-    height: 100%;
-    overflow: auto;
     background: #ededed !important;
 }
 h1 {
@@ -14,6 +12,10 @@ h1 {
 }
 .bg-primary {
     background: #3f1ca0 !important;
+}
+#global-icon {
+    color: #FFFFFF;
+    text-decoration: none;
 }
 #global-navigation {
     height: 100px;
@@ -28,10 +30,22 @@ h1 {
     border: 2px solid #FFF;
     padding: 10px 15px 10px 15px;
     border-radius: 0;
-    margin-right: 5%;
+    margin-right: 20px;
 }
 #register-btn:hover {
     color: #3f1ca0;
     background: #FFF;
     border: 2px solid #3f1ca0;
+}
+@media only screen and (max-width: 1000px) {
+    #global-search, #register-btn {
+        width: 100%;
+        margin-top: 5px;
+        position: relative;
+        top: 60px;
+        z-index: 999999;
+    }
+    #global-search {
+        border: 2px solid #3f1ca0;
+    }
 }

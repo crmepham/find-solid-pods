@@ -1,0 +1,13 @@
+#register-service-container {
+    padding-top: 50px;
+    background: #ededed;
+    height: 100%;
+}
+#registration-required-section {
+    border: 1px solid #3f1ca0;
+    background: #e7e4ff;
+    padding: 20px;
+}
+#registration-optional-section {
+    padding: 20px;
+}

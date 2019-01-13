@@ -48,14 +48,10 @@
         <kotlin-reflect.version>1.2.71</kotlin-reflect.version>
         <elastic-search.version>6.5.2</elastic-search.version>
         <jna.version>5.1.0</jna.version>
+        <flyway.version>5.1.4</flyway.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>

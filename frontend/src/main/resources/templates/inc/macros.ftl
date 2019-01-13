@@ -1,7 +1,7 @@
 <#macro provider p>
 <div class="provider-container">
-    <div class="provider-header" style="background: ${p.iconBackground};">
-        <img class="provider-icon" src="${p.icon}" alt="${p.title}" />
+    <div class="provider-header" style="background: ${p.iconBackgroundColor};">
+        <img class="provider-icon" src="<#if p.iconUri?has_content>${p.iconUri}<#else>${properties.solidLogoUri}</#if>" alt="${p.title}" />
         <h3>${p.title}</h3>
     </div>
     <div class="provider-body">
@@ -17,7 +17,8 @@
     </div>
 </div>
 </#macro>
-<#macro select label id items>
+
+<#macro selectWithLabel label id items>
 <div class="input-container">
     <select id="${id}" class="filter-select">
         <option selected disabled>${label}</option>
@@ -27,4 +28,22 @@
         </#list>
     </select>
 </div>
+</#macro>
+
+<#macro select name options item>
+<select class="form-control" name="${name}">
+    <#list options as o>
+        <option value="${o}" <#if item.type?has_content && item.type == o>selected</#if>>${o?cap_first}</option>
+    </#list>
+</select>
+</#macro>
+
+<#macro formError value="">
+<#if value?has_content>
+<div class="col-12">
+    <div class="alert alert-danger" role="alert">
+        ${value}
+    </div>
+</div>
+</#if>
 </#macro>
