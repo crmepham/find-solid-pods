@@ -60,9 +60,11 @@ class PodService(private val properties: ProviderProperties,
 
         if (newDatabaseProviders.isNotEmpty()) {
             providerRepository.saveAll(newDatabaseProviders)
+            logger.info("Persisted {} providers from {} known sources.", filtered.size, properties.sources?.size)
+        } else {
+            logger.debug("Persisted {} providers from {} known sources.", filtered.size, properties.sources?.size)
         }
 
-        logger.info("Persisted {} providers from {} known sources.", filtered.size, properties.sources?.size)
     }
 
     private fun validate(filtered: List<Provider>) {
