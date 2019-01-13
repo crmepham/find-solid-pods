@@ -166,6 +166,6 @@ class ElasticSearchService {
 
     /** Define the global Elastic Search settings here. */
     private fun settings(): Settings? {
-        return Settings.builder().put("cluster.name", "elasticsearch_crm").build()
+        return Settings.builder().put("cluster.name", "elasticsearch").build()
     }
 }
