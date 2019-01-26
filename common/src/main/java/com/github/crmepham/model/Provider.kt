@@ -38,7 +38,7 @@ class Provider {
         @Column(name = "country_code")
         var countryCode: String? = null
         @Column(name = "active")
-        var active: Boolean = false
+        var active: Boolean = true
         @Column(name = "indexed")
         var indexed: Boolean = false
         @Column(name = "created")

@@ -1,5 +1,7 @@
 package com.github.crmepham.service
 
+import com.github.crmepham.model.ElasticSearchProperties
+import com.github.crmepham.model.RegistrationProperties
 import com.github.crmepham.model.SearchFilter
 import com.google.gson.GsonBuilder
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest
@@ -30,7 +32,7 @@ import java.util.Arrays.asList
  */
 @Service
 @Scope(SCOPE_SINGLETON)
-class ElasticSearchService {
+class ElasticSearchService(private val properties: ElasticSearchProperties) {
 
     companion object {
 
@@ -161,11 +163,11 @@ class ElasticSearchService {
     /** Initialize the single transport client. */
     private fun initializeTransportClient() : TransportClient {
         return PreBuiltTransportClient(settings())
-                .addTransportAddresses(TransportAddress(InetSocketAddress(InetAddress.getByName("localhost"), 9300)))
+                .addTransportAddresses(TransportAddress(InetSocketAddress(InetAddress.getByName(properties.host), properties.port.toInt())))
     }
 
     /** Define the global Elastic Search settings here. */
     private fun settings(): Settings? {
-        return Settings.builder().put("cluster.name", "elasticsearch").build()
+        return Settings.builder().put("cluster.name", properties.clusterName).build()
     }
 }

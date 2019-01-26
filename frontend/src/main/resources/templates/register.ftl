@@ -101,11 +101,7 @@
                                         <@formError value=item.buttonBackgroundColorError />
                                     </div>
 
-                                    <div class="form-group row">
-                                        <div class="col-3"><label class="col-form-label right">ReCaptcha*</label></div>
-                                        <div class="col-9"><div class="g-recaptcha" data-sitekey="${properties.captchaSiteKey}"></div></div>
-                                        <@formError value=item.captchaError />
-                                    </div>
+                                    <input id="bot-catcher" type="text" name="username">
 
                                 </div>
 

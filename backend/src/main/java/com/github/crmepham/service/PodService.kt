@@ -35,7 +35,7 @@ class PodService(private val properties: ProviderProperties,
 
         val sum = newProviders + knownProviders
 
-        val filtered = sum.groupBy { it.uri }
+        var filtered = sum.groupBy { it.uri }
                           .filter { it.value.size == 1 }
                           .flatMap { it.value }
 
@@ -43,12 +43,12 @@ class PodService(private val properties: ProviderProperties,
 
         val newDatabaseProviders = providerRepository.findByIndexedFalseAndActiveTrue()
 
-        if (newDatabaseProviders.isNotEmpty()) {
-            logger.debug("Found {} new active providers waiting to be indexed.", newDatabaseProviders.size)
+        logger.debug("Found {} new active providers waiting to be indexed.", newDatabaseProviders.size)
+        if (newDatabaseProviders.isEmpty()) {
             return
         }
 
-        filtered.plus(newDatabaseProviders)
+        filtered = filtered.plus(newDatabaseProviders)
 
         if (filtered.isNotEmpty()) {
             filtered.forEach {

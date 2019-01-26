@@ -26,8 +26,8 @@ class RegisterController(private val providerService: ProviderService, private v
     }
 
     @PostMapping("/register")
-    fun post(@ModelAttribute("registerForm") form: RegisterForm, @RequestParam("g-recaptcha-response") captcha: String,  model: Model) : String {
-        providerRegistrationService.validate(form, captcha)
+    fun post(@ModelAttribute("registerForm") form: RegisterForm,  model: Model) : String {
+        providerRegistrationService.validate(form)
         if (!form.containsError) {
             providerRegistrationService.persist(form)
         }

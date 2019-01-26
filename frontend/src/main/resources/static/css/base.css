@@ -3,6 +3,9 @@
 }
 html, body {
     background: #ededed !important;
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 h1 {
     color: #FFF;
@@ -48,4 +51,15 @@ h1 {
     #global-search {
         border: 2px solid #3f1ca0;
     }
+}
+#bot-catcher {
+    display: none;
+}
+
+#feedback {
+    color: #FFF;
+    background: #3f1ca0;
+    padding: 10px;
+    position: fixed; right: -30px; top: 70%;
+    transform: rotate(-90deg);
 }

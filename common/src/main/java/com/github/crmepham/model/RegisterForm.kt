@@ -2,6 +2,7 @@ package com.github.crmepham.model
 
 class RegisterForm {
     var title: String? = null
+    var username: String? = null
     var description: String? = null
     var uri: String? = null
     var type: String? = null

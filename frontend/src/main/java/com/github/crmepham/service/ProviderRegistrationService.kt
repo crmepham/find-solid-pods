@@ -23,8 +23,8 @@ class ProviderRegistrationService(private val properties: RegistrationProperties
 
     private val logger = LoggerFactory.getLogger(ProviderRegistrationService::class.java)
 
-    fun validate(form: RegisterForm, captcha: String) {
-        if (!hasText(captcha)) {
+    fun validate(form: RegisterForm) {
+        if (hasText(form.username)) {
             form.containsError = true
             form.captchaError = properties.captchaError
             return
@@ -120,7 +120,7 @@ class ProviderRegistrationService(private val properties: RegistrationProperties
     private fun uriExists(input: String) : Boolean {
         try {
             val res = restTemplate.exchange(input, HttpMethod.GET, HttpEntity<Any>(HttpHeaders()), object : ParameterizedTypeReference<String>() {})
-            if (res.statusCodeValue != 200) {
+            if (!listOf(200, 301, 302).contains(res.statusCodeValue) ) {
                 return false
             }
         } catch (e: HttpClientErrorException) {
